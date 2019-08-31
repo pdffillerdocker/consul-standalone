@@ -21,6 +21,8 @@ Tags that can point to different images over time
 Tags that used for development purposes and can be (and most likely will be) deleted/rebuilt
 at any time
 
+-	`1.5.2-alpha`
+
 
 # Quick reference
 
@@ -46,8 +48,8 @@ at any time
 # Consul-standalone
 
 Consul-standalone is lightweight Docker image based on [Consul official docker image](https://hub.docker.com/_/consul)
-and designed to be used as light standalone Consul server with provisioned key/value ("KV") in local development (e.g. `docker-compose`)
-or testing/QA environments.
+and designed to be used as light standalone Consul server with provisioned key/value ("KV") in
+local development (e.g. `docker-compose`) or testing/QA environments.
 
 # Contents
 
@@ -69,6 +71,7 @@ or testing/QA environments.
     - [With Consul UI](#with-consul-ui)
     - [By changing KV file](#by-changing-kv-file)
     - [Directly from command line](#directly-from-command-line)
+- [Tagging convention](#tagging-convention)
 - [License](#license)
 
 # How to use this image
@@ -79,15 +82,16 @@ The simpliest (but not the most useful) way to use this image is just run it:
 $ docker run -d --rm -p 8500:8500 pdffiller/consul-standalone
 ```
 
-In such a case, you will get a Consul standalone server without any KV in it, providing Consul HTTP API at port `8500/tcp` of your local machine
-and with UI accessible by [http://localhost:8500/ui/](http://localhost:8500/ui/). 
+In such a case, you will get a Consul standalone server without any KV in it, providing Consul HTTP
+API at port `8500/tcp` of your local machine and with UI accessible by [http://localhost:8500/ui/](http://localhost:8500/ui/).
 
 ## Provisioning
 
-In many cases, the application, which being developed or tested, expects that there are some KV in Consul. In such situations, consul-standalone can be
-provisioned with KVs using simple YAML or JSON file ("KV file") mounted or copied to a container and passed as command. This file
-should contain plain JSON object or YAML associative array with strings, integers or booleans as values (integers and booleans are
-converted to strings).
+In many cases, the application, which being developed or tested, expects that there are some KV in
+Consul. In such situations, consul-standalone can be provisioned with KVs using simple YAML or JSON
+file ("KV file") mounted or copied to a container and passed as command. This file should contain
+plain JSON object or YAML associative array with strings, integers or booleans as values (integers
+and booleans are converted to strings).
 
 JSON example (`provision/kv.json`):
 
@@ -135,17 +139,18 @@ services:
 ...
 ```
 
-If path to readable `.yml`, `.yaml` or `.json` file is passed as a first argument of the docker command, consul-template
-image entrypoint will create background job, which will wait for Consul to start and populate the KVs described in KV file.
+If path to readable `.yml`, `.yaml` or `.json` file is passed as a first argument of the docker
+command, consul-template image entrypoint will create background job, which will wait for Consul to
+start and populate the KVs described in KV file.
 
 ## Templating
 
 The KV file can be templated using environment variables.
 
-There is a special environment variable called `UPDATEKV_VARIABLES`, whose value should be a comma-separated list of
-environment variable names, which you want to use. If `VAR_NAME` is present in `UPDATEKV_VARIABLES`, a provisioning
-script will replace all special strings like `$VAR_NAME$` into the value of the environment variable `VAR_NAME` inside
-the KV file before parsing.
+There is a special environment variable called `UPDATEKV_VARIABLES`, whose value should be a
+comma-separated list of environment variable names, which you want to use. If `VAR_NAME` is present
+in `UPDATEKV_VARIABLES`, a provisioning script will replace all special strings like `$VAR_NAME$`
+into the value of the environment variable `VAR_NAME` inside the KV file before parsing.
 
 For example if you have `provision/kv.yml` KV file:
 
@@ -180,9 +185,9 @@ other/path: true
 
 ## Sample docker-compose configuration
 
-Since `docker-compose` allows the definition of environment variables in multiple ways, it would be convenient not
-to define variables used by consul-standalone in `environment` block of `docker-compose.yml` file, but place them in
-separate `*.env` file.
+Since `docker-compose` allows the definition of environment variables in multiple ways, it would be
+convenient not to define variables used by consul-standalone in `environment` block of
+`docker-compose.yml` file, but place them in separate `*.env` file.
 
 For example, if you have `provision/kv.yml`:
 
@@ -229,8 +234,9 @@ services:
 
 ### Persistent consul data
 
-By default, consul-standalone container doesn't exposes volumes. So no data (including KV) is saved if container is recreated.
-It is possible to make consul data persistent by mounting `/consul/data` as a volume:
+By default, consul-standalone container doesn't exposes volumes. So no data (including KV) is saved
+if container is recreated. It is possible to make consul data persistent by mounting `/consul/data`
+as a volume:
 
 ```bash
 $ docker run \
@@ -264,9 +270,10 @@ services:
 ...
 ```
 
-Keep in mind that the KV provisioning script creates by default only non-existant keys, so if some key exists in consul it will not
-be updated from KV file. This behavior can be changed by adding `--force` parameter to docker command after KV file name.
-In such case all keys defined in KV file will be updated to values defined in KV file.
+Keep in mind that the KV provisioning script creates by default only non-existant keys, so if some
+key exists in consul it will not be updated from KV file. This behavior can be changed by adding
+`--force` parameter to docker command after KV file name. In such case all keys defined in KV file
+will be updated to values defined in KV file.
 
 Example:
 
@@ -292,7 +299,8 @@ services:
 
 ### KV file mounting
 
-In all examples above the KV file was mounted as part of directory. In fact the KV file can be mounted as file itself:
+In all examples above the KV file was mounted as part of directory. In fact the KV file can be
+mounted as file itself:
 
 ```yml
 services:
@@ -308,12 +316,14 @@ services:
 ...
 ```
 
-But pay attention! Many text editors recreate files when editing leading index number of file changes. Docker
-bind mount of file can not handle such changes, so a container will continue execute with old data in KV file.
+But pay attention! Many text editors recreate files when editing leading index number of file
+changes. Docker bind mount of file can not handle such changes, so a container will continue
+execute with old data in KV file.
 
 ## Changing KV
 
-Consul KV can be changed at runtime in several ways. Considering you are running following `docker-compose.yml`:
+Consul KV can be changed at runtime in several ways. Considering you are running following
+`docker-compose.yml`:
 
 ```yml
 services:
@@ -333,7 +343,7 @@ you can update consul KV
 
 ### With Consul UI
 
-As Consul UI is enabled by default, you can change the KV using your web browser with it at 
+As Consul UI is enabled by default, you can change the KV using your web browser with it at
 [http://localhost:8500/ui/](http://localhost:8500/ui/)
 
 
@@ -370,6 +380,73 @@ With `docker` CLI:
 ```bash
 $ echo '$KV_PATH$/new_key: new_value' | docker exec -i <consul-standalone_container_id_or_name> update-kv -
 ```
+
+# Tagging convention
+
+Consul-standalone has a variety of image versions/variants with different tags. Although tags are
+often confused with versions, this is a misconception and is not true. Tags are not versions in the
+general sense, because it is possible to rebuild the image with a specific tag. For convenience,
+tags are often made to correspond to certain versions, but you can not argue that some Docker image
+with some tag is the same as three months before. So it is a good idea to describe some
+"tagging principles" to make clear for those, who will use this Docker image, what to expect
+from a particular tag.
+
+Consul-standalone Docker image consists of two main logical parts, which are versioned
+independently:
+
+- Consul official docker image, on which consul-standalone is based;
+- provisioning script, own consul-standalone's `Dockerfile`, etc.
+
+As the main purpose of consul-standalone image is to act as standalone Consul server, it was
+decided to use Consul version as a tag, to be convenient for consul-standalone image consumers.
+
+Also the concept of *"supported versions"* is used. Here "supported versions" are versions of
+Consul for which new consul-standalone Docker images will be built in case of consul-standalone's
+`Dockerfile` and/or provisioning script change. For now supported Consul versions are:
+
+- 0.8.2
+- 1.5.3
+
+This list can be (and will be) changed with time.
+
+Consul-standalone Docker image tags are divided into three groups:
+- [**Immutable tags**](#tags-frozen)
+
+  Tags of the form **`N.N.N`** or **`N.N.N-N`**, where **N** is a number.
+
+  Images with immutable tags should be built only once and should not be rebuilt/retagged in normal
+  cases (an example of an abnormal case might be a docker registry crash or something similar).
+
+- [**Mutable Tags**](#tags-stable)
+
+  Tags of the form **`N.N`**, **`N`** or **`latest`**.
+
+  Mutable tags can be assigned and reassigned to different images. Ordinarily, such tags will be
+  assigned to most recent images, built with the latest minor, latest major and latest versions of
+  Consul correspondently.
+
+- [**Development Tags**](#tags-dev)
+
+  Any other tags (e.g. **`1.5.2-alpha`** etc).
+
+  Images with such tags are used for development, testing, and other similar purposes. Such
+  images can be (and most likely will be) deleted at any time. You do not want to use such
+  images.
+
+When new significant changes occur in consul-standalone's code (`Dockerfile`, provisioning script,
+etc) new Docker images for all supported versions are built. If an image with an immutable tag
+already exists for specific Consul version, newly built image is tagged with the next free tag with
+**`-N`** suffix, where N is a number, starting from 1. So images with `0.8.2` version of Consul
+will have tags `0.8.2`, `0.8.2-1`, `0.8.2-2`, and so on. And the `0.8.2-2` image is newer than
+`0.8.2-1`, and they both are newer than `0.8.2`.
+
+Simultaneously mutable tags are assigned the to most recent corresponding immutable tag. E.g.
+`1.5` tag chronologically points to `1.5.2`, `1.5.2-1`, `1.5.2-2`, `1.5.3`, `1.5.3-1`,
+`1.5.4` and so on.
+
+When choosing which tag to use, it is recommended to use mutable tags at the start for developing,
+as this will allow using the latest, most recent features. When the application goes to production
+it will be better to use immutable tags for builds, as this will be more stable and predictable.
 
 # License
 
