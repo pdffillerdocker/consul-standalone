@@ -1,4 +1,4 @@
-ARG CONSUL_VERSION=1.5.3
+ARG CONSUL_VERSION=1.6.0
 
 FROM consul:${CONSUL_VERSION} AS consul
 
@@ -7,10 +7,12 @@ FROM python:3-alpine
 ARG BUILD_ID=0
 ARG CONSUL_VERSION
 ARG VERSION=${CONSUL_VERSION}
+ARG COMPONENTS_VERSION=1.0.0
 
 LABEL build_id="${BUILD_ID}" \
       version="${VERSION}" \
       consul_version="${CONSUL_VERSION}" \
+      components_version="${COMPONENTS_VERSION}" \
       description="KV Provisioned Consul Docker Image" \
       maintainer="Anton Trifonov <rin@pdffiller.team>"
 
