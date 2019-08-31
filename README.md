@@ -4,6 +4,7 @@
 
 Tags that were once built and should not be rebuilt
 
+-	[`0.8.2`](https://github.com/pdffillerdocker/consul-standalone/blob/3ad489783d5823c79f59208cfa4dff446e12b7ff/Dockerfile)
 -	[`1.5.3`](https://github.com/pdffillerdocker/consul-standalone/blob/49bac345b06ca984cd0ddfc92850763b4de49ec9/Dockerfile)
 
 
@@ -11,6 +12,7 @@ Tags that were once built and should not be rebuilt
 
 Tags that can point to different images over time
 
+-	[`0.8`](https://github.com/pdffillerdocker/consul-standalone/blob/3ad489783d5823c79f59208cfa4dff446e12b7ff/Dockerfile)
 -	[`1.5`, `latest`](https://github.com/pdffillerdocker/consul-standalone/blob/49bac345b06ca984cd0ddfc92850763b4de49ec9/Dockerfile)
 
 
