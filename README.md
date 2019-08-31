@@ -4,16 +4,23 @@
 
 Tags that were once built and should not be rebuilt
 
--	[`0.8.2`](https://github.com/pdffillerdocker/consul-standalone/blob/3ad489783d5823c79f59208cfa4dff446e12b7ff/Dockerfile)
--	[`1.5.3`](https://github.com/pdffillerdocker/consul-standalone/blob/49bac345b06ca984cd0ddfc92850763b4de49ec9/Dockerfile)
+-	[`0.8.2`](https://github.com/pdffillerdocker/consul-standalone/blob/3ad489783d5823c79f59208cfa4dff446e12b7ff/Dockerfile),
+	[`0.8.2-1`](https://github.com/pdffillerdocker/consul-standalone/blob/156d9e18745717da10a4fdb39b7b2ff2a8859201/Dockerfile)
+-	[`1.4.4`](https://github.com/pdffillerdocker/consul-standalone/blob/6eeec1bd3291c4a9f5b91f1d21c8cad7bb78da2a/Dockerfile);
+	[`1.4.5`](https://github.com/pdffillerdocker/consul-standalone/blob/c7096db35e0fe04bdb1adab9a2a1da5cb5409707/Dockerfile)
+-	[`1.5.3`](https://github.com/pdffillerdocker/consul-standalone/blob/49bac345b06ca984cd0ddfc92850763b4de49ec9/Dockerfile),
+	[`1.5.3-1`](https://github.com/pdffillerdocker/consul-standalone/blob/1ac7be41279f0bff8ceb0d62547c4e4325946ad2/Dockerfile)
+-	[`1.6.0`](https://github.com/pdffillerdocker/consul-standalone/blob/887ba2c950e53d0af87ff0394c60c15c23af519c/Dockerfile)
 
 
 ## <a name="tags-stable"></a>Mutable tags
 
 Tags that can point to different images over time
 
--	[`0.8`](https://github.com/pdffillerdocker/consul-standalone/blob/3ad489783d5823c79f59208cfa4dff446e12b7ff/Dockerfile)
--	[`1.5`, `latest`](https://github.com/pdffillerdocker/consul-standalone/blob/49bac345b06ca984cd0ddfc92850763b4de49ec9/Dockerfile)
+-	[`0.8`](https://github.com/pdffillerdocker/consul-standalone/blob/156d9e18745717da10a4fdb39b7b2ff2a8859201/Dockerfile)
+-	[`1.4`](https://github.com/pdffillerdocker/consul-standalone/blob/c7096db35e0fe04bdb1adab9a2a1da5cb5409707/Dockerfile)
+-	[`1.5`](https://github.com/pdffillerdocker/consul-standalone/blob/1ac7be41279f0bff8ceb0d62547c4e4325946ad2/Dockerfile)
+-	[`1.6`, `latest`](https://github.com/pdffillerdocker/consul-standalone/blob/887ba2c950e53d0af87ff0394c60c15c23af519c/Dockerfile)
 
 
 ## <a name="tags-dev"></a>Development tags
@@ -405,7 +412,9 @@ Consul for which new consul-standalone Docker images will be built in case of co
 `Dockerfile` and/or provisioning script change. For now supported Consul versions are:
 
 - 0.8.2
+- 1.4.4
 - 1.5.3
+- 1.6.0
 
 This list can be (and will be) changed with time.
 
