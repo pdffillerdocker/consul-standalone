@@ -176,6 +176,10 @@ for k, v in kv.items():
         err_msg = 'invalid KV file content: should be plain JSON object ' \
                   'or YAML associative array with strings, integers or ' \
                   'booleans as values'
+
+        if type(k) == str:
+            err_msg += f" (wrong value type for key '{k}')"
+
         print(f'Error: {err_msg}', file=sys.stderr)
         sys.exit(2)
 
